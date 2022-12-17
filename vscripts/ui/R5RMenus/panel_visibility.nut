@@ -19,18 +19,22 @@ void function InitR5RVisPanel( var panel )
 {
 	file.panel = panel
 	file.menu = GetPanel( "R5RPrivateMatchPanel" )
+
 	file.listPanel = Hud_GetChild( panel, "VisList" )
-	
+
 	var scrollPanel = Hud_GetChild( file.listPanel, "ScrollPanel" )
 
-	Hud_InitGridButtons( file.listPanel, visibility.len() )
+	int m_vis_count = visibility.len()
+
+	Hud_InitGridButtons( file.listPanel, m_vis_count )
+
 	foreach ( int id, int vis in visibility )
 	{
 		var button = Hud_GetChild( scrollPanel, "GridButton" + id )
         var rui = Hud_GetRui( button )
 	    RuiSetString( rui, "buttonText", GetUIVisibilityName(vis) )
 
-		//Add the Event handler for the button
+		//Add the Even handler for the button
 		Hud_AddEventHandler( button, UIE_CLICK, SelectServerVis )
 		Hud_AddEventHandler( button, UIE_GET_FOCUS, OnVisHover )
 		Hud_AddEventHandler( button, UIE_LOSE_FOCUS, OnVisUnHover )
@@ -43,6 +47,8 @@ void function InitR5RVisPanel( var panel )
 void function SelectServerVis( var button )
 {
 	EmitUISound( "menu_accept" )
+	
+	//Set selected server vis
 	SetSelectedServerVis(file.vis_button_table[button])
 }
 

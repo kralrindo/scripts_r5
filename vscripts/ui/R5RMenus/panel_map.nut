@@ -20,10 +20,16 @@ void function InitR5RMapPanel( var panel )
 
 void function RefreshUIMaps()
 {
-	var scrollPanel = Hud_GetChild( file.listPanel, "ScrollPanel" )
+	//GetUIMapAsset(m_vMaps[i])
 
 	array<string> m_vMaps = GetPlaylistMaps(ServerSettings.svPlaylist)
-	Hud_InitGridButtons( file.listPanel, m_vMaps.len() )
+
+	int m_vMaps_count = m_vMaps.len()
+
+	var scrollPanel = Hud_GetChild( file.listPanel, "ScrollPanel" )
+
+	Hud_InitGridButtons( file.listPanel, m_vMaps_count )
+
 	foreach ( int id, string map in m_vMaps )
 	{
 		var button = Hud_GetChild( scrollPanel, "GridButton" + id )
